@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ログイン</title>
 </head>
 <body>
-ログイン画面作成
+<p th:text="${msg}">
+<form method="post" action="loginToTop" th:object="${loginForm}">
+    ユーザ    <input type="text"  maxlength="10" value="" th:field="*{userName}"><br/>
+    パスワード<input type="text"  maxlength="10" value=""  th:field="*{passWord}"><br/>
+    <input type="submit" value="ログイン">
+</form>
+
 </body>
 </html>
