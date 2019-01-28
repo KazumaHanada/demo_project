@@ -5,6 +5,47 @@
     <title>メンテナンス</title>
 </head>
 <body>
+<p th:text="${msg}">
+<form method="post" action="register" th:object="${customerForm}">
+    顧客会社名<input type="text"  maxlength="20" value="" th:field="*{company}">
+    顧客部門<input type="text"  　maxlength="10" value="" th:field="*{dept}">
+    顧客役職<input type="text"  　maxlength="10" value="" th:field="*{post}">
+    顧客氏名<input type="text"  　maxlength="10" value="" th:field="*{name}">
+    <br/>
+    担当部門<input type="text"  　maxlength="10" value="" th:field="*{c_dept}">
+    担当役職<input type="text"  　maxlength="10" value="" th:field="*{c_post}">
+    担当氏名<input type="text"  　maxlength="10" value="" th:field="*{c_name}">
+    <input type="submit" value="登録">
+</form>
+<br/>
+<br/>
+<table th:inline="text">
+    <tr>
+        <th>ID</th>
+        <th>顧客会社名</th>
+        <th>顧客部門</th>
+        <th>顧客役職</th>
+        <th>顧客氏名</th>
+        <th>担当部門</th>
+        <th>担当役職</th>
+        <th>担当氏名</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each = "obj:${cLst}">
+        <td>[[${obj.id}]]</td>
+        <td>[[${obj.company}]]</td>
+        <td>[[${obj.dept}]]</td>
+        <td>[[${obj.post}]]</td>
+        <td>[[${obj.name}]]</td>
+        <td>[[${obj.c_dept}]]</td>
+        <td>[[${obj.c_post}]]</td>
+        <td>[[${obj.c_name}]]</td>
+        <td><form><input type="submit" value="編集"></form></td>
+        <td><form method="post" action="delete"><input hidden name="id" th:value="${obj.id}"><input type="submit" value="削除"></form></td>
+    </tr>
+</table>
+
 
 </body>
 </html>
