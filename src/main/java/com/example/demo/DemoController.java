@@ -54,7 +54,7 @@ public class DemoController {
         StringBuilder sb = new StringBuilder();
         sb.append("https://www.facebook.com/dialog/oauth");
         sb.append("?client_id=1184646115046814");
-        sb.append("&redirect_uri=http://52.194.114.83/demo/access");
+        sb.append("&redirect_uri=http://52.194.114.83/access");
         sb.append("&scope=public_profile,email");
 
         System.out.println(sb.toString());
