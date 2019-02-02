@@ -1,9 +1,18 @@
 package com.example.demo;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
 import com.example.demo.AccountTbl.Account;
 import com.example.demo.AccountTbl.AccountMapper;
 import com.example.demo.CustomerTbl.Customer;
 import com.example.demo.CustomerTbl.CustomerMapper;
+
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpResponse;
+import com.google.api.client.http.HttpResponseException;
+import com.google.api.client.http.javanet.NetHttpTransport;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -33,9 +43,43 @@ public class DemoController {
     @RequestMapping("/")
     public String root(){
 
-        return "redirect:/login";
+        return "redirect:login";
     }
 
+
+    //ログイン画面表示　
+    @RequestMapping(value = "/facebookLogin", method = RequestMethod.GET)
+    public String facebookLogin(ModelAndView mav, Model model){
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://www.facebook.com/dialog/oauth");
+        sb.append("?client_id=1184646115046814");
+        sb.append("&redirect_uri=http://52.194.114.83/demo/access");
+        sb.append("&scope=public_profile,email");
+
+        System.out.println(sb.toString());
+
+        return "redirect:" + sb.toString();
+    }
+
+
+    @RequestMapping(value = "/access", method = RequestMethod.GET)
+    public String getUserInfoFromFaceBook(@RequestParam("code")String code){
+
+        String token = getAccessToken(code);
+        getUserInfo(token);
+
+        return "redirect:top";
+    }
+
+    private String getAccessToken(String code){
+
+        return null;
+    }
+
+    private void getUserInfo(String token){
+
+    }
 
 
     //ログイン画面表示　
